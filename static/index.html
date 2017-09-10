@@ -120,17 +120,7 @@
 </head>
 <body>
   <div class="container">
-    <div class="header clearfix">
-      <nav>
-        <ul class="nav nav-pills pull-right">
-          <!-- TODO вынести шапку в riot tag и добавить логику -->
-          <li role="presentation" class="active"><a href="#/">Мои автомобили</a></li>
-          <li role="presentation"><a href="#/signup">Регистрация</a></li>
-        </ul>
-      </nav>
-      <h3 class="text-muted">ПомойАвто</h3>
-    </div>
-
+    <div id='header'></div>
     <div id="page-container"></div>
 
     <footer class="footer">
@@ -141,11 +131,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
   <!-- custom riot tags -->
-  <script type="riot/tag" src="/pages/signup-page.tag.html"></script>
-  <script type="riot/tag" src="/pages/cars-page.tag.html"></script>
+  <script type="riot/tag" src="pages/signup-page.tag.html"></script>
+  <script type="riot/tag" src="pages/cars-page.tag.html"></script>
+  <script type="riot/tag" src="pages/header.tag.html"></script>
 
-  <script src="/vendor/navigo.js"></script><!-- router -->
-  <script src="/vendor/fetch.js"></script><!-- uses isomorfic fetch for IE support -->
+  <script src="vendor/navigo.js"></script><!-- router -->
+  <script src="vendor/fetch.js"></script><!-- uses isomorfic fetch for IE support -->
 
   <script type="text/javascript">
     window.getAPIUrl = function(endpoint){
@@ -166,6 +157,8 @@
     var useHash = true
     var router = new Navigo(root, useHash)
 
+    riot.mount('div#header', 'header')
+
     window.go2page = function(url){
       router.navigate(url);
     }
@@ -176,9 +169,13 @@
         riot.mount(mountPoint, 'signup-page', {})
       },
 
-      '/': function(){
+      '/cars/': function(){
         riot.mount(mountPoint, 'cars-page', {})
       },
+
+      '/': function(){
+        window.go2page('#/cars/')
+      }
     }).resolve();
 
   }
