@@ -1,6 +1,7 @@
 # Frontend for SPA «ПомойАвто»
 
 It is a frontend for single page application. Reach JavaScript is present.
+Before working with site you must register. Use complicated password for it!
 
 # Deploy on localhost
 
@@ -8,10 +9,10 @@ Example of frontend launch on Linux, Python 3.5:
 
 ```bash
 cd static/
-python3 -m http.server
+python3 -m http.server 9000
 ```
 
-Open page [127.0.0.1:8000](http://127.0.0.1:8000) in browser.
+Open page [localhost:9000](http://localhost:9000) in browser.
 
 # Deploy on production server
 
